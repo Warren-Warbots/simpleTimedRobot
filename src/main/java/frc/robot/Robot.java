@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class Robot extends TimedRobot {
   public TalonFX intakeMotor = new TalonFX(0,"rio");
   public XboxController xbox = new XboxController(0);
-
+  public DutyCycleOut intakeMotorRequest = new DutyCycleOut(0.0);
   @Override
   public void robotInit() {
     
@@ -24,7 +25,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
   
     
-    intakeMotor.set(xbox.getLeftY());
+    intakeMotor.setControl(intakeMotorRequest.withOutput(xbox.getLeftY()));
 
   }
 
